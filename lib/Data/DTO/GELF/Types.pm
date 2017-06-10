@@ -1,8 +1,8 @@
 package Data::DTO::GELF::Types;
 
 # ABSTRACT: Special types for log level conversion
-# VERSION 1.2
-our $VERSION=1.2;
+# VERSION 1.3
+our $VERSION=1.3;
 use MooseX::Types -declare => [
     qw(
         LogLevel

@@ -24,7 +24,7 @@ to use the gzip method later.
 # EXAMPLE
 
 Write a server quickly using the IO::Socket:
-(based on [https://docstore.mik.ua/orelly/perl/cookbook/ch17\_06.htm](https://docstore.mik.ua/orelly/perl/cookbook/ch17_06.htm))
+(based on orelly-perl-cookbook-ch17)
 
        use strict;
        use IO::Socket;

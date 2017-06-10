@@ -1,8 +1,8 @@
 package Log::Log4perl::Appender::Graylog;
 
 # ABSTRACT: Log dispatcher writing to udp Graylog server
-# VERSION 1.2
-my $VERSION=1.2;
+# VERSION 1.3
+my $VERSION=1.3;
 our @ISA = qw(Log::Log4perl::Appender);
 
 use strict;
@@ -99,7 +99,7 @@ to use the gzip method later.
 =head1 EXAMPLE
  
 Write a server quickly using the IO::Socket:
-(based on L<https://docstore.mik.ua/orelly/perl/cookbook/ch17_06.htm>)
+(based on orelly-perl-cookbook-ch17)
  
     use strict;
     use IO::Socket;
