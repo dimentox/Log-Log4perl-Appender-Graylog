@@ -4,9 +4,9 @@ Log::Log4perl::Appender::Graylog; - Log to a Graylog server
 
 # SYNOPSIS
 
-       use Log::Log4perl::Appender::Graylog;;
+       use Log::Log4perl::Appender::Graylog;
     
-       my $appender = Log::Log4perl::Appender::Socket->new(
+       my $appender = Log::Log4perl::Appender::Graylog->new(
          PeerAddr => "glog.foo.com",
          PeerPort => 12209,
        );
