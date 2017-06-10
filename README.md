@@ -19,7 +19,7 @@ Log::Log4perl::Appender::Graylog; - Log to a Graylog server
 This is a simple appender for writing to a graylog server.
 It relies on [IO::Socket::INET](https://metacpan.org/pod/IO::Socket::INET). This sends in the 1.1
 format. Hoever it does not gzip the message. There are plans
-to use teh gzip method later.
+to use the gzip method later.
 
 # EXAMPLE
 
