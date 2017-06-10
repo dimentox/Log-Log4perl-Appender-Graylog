@@ -1,5 +1,7 @@
 package Data::DTO::GELF;
 
+# ABSTRACT: The DTO object for GELF version 1.1
+
 use strict;
 use warnings;
 
