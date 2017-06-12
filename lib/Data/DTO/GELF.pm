@@ -1,8 +1,8 @@
 package Data::DTO::GELF;
 
 # ABSTRACT: The DTO object for GELF version 1.1
-# VERSION 1.5
-our $VERSION=1.5;
+# VERSION 1.5.1
+our $VERSION = 1.5.1;
 use strict;
 use warnings;
 
@@ -82,20 +82,14 @@ sub BUILD {
         }
     }
 
-    
- 
-my $trace = Devel::StackTrace->new;
-foreach my $frame($trace->frames)
-{
-    if($frame->{subroutine} eq "Log::Log4perl::Logger::__ANON__")
-    {
-    $self->_line($frame->{line});
-    $self->_file( $frame->{filename});
-    $self->_facility($frame->{package});
+    my $trace = Devel::StackTrace->new;
+    foreach my $frame ( $trace->frames ) {
+        if ( $frame->{subroutine} eq "Log::Log4perl::Logger::__ANON__" ) {
+            $self->_line( $frame->{line} );
+            $self->_file( $frame->{filename} );
+            $self->_facility( $frame->{package} );
+        }
     }
-}
-
-
 
 }
 
@@ -129,15 +123,19 @@ sub message {
 
 sub _long_to_short {
     my $self = shift;
-    my $msg = substr $self->full_message(), 0, 50;
-    $msg =~ s/\n.*//s;
+    my $msg  = $self->full_message();
+    $msg =~ s/\n//sg;
+    $msg =~ s/\s\s//sg;
+    $msg = substr $msg, 0, 100;
     return $msg;
 }
+
 sub TO_HASH {
     my $self = shift;
     { $self->short_message() }    #fire off lazy message builder
     return {%$self};
 }
+
 sub TO_JSON {
     my $self = shift;
     { $self->short_message() }    #fire off lazy message builder

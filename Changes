@@ -1,3 +1,6 @@
+1.5.1
+Adding script for further testing
+
 1.5
 Switched form custom parser to Log::GELF::Util
 Added chunking and tpc or udp sending.

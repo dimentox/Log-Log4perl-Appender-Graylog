@@ -41,8 +41,8 @@ subtest "$CLASS has proper values" => sub {
         "Full message is ok" );
     cmp_ok(
         $obj->short_message(), "eq",
-        ( substr $data->{full_message}, 0, 50 ),
-        "Short message is full message truncated to 50 chars."
+        ( substr $data->{full_message}, 0, 100 ),
+        "Short message is full message truncated to 100 chars."
     );
     cmp_ok( $obj->level(), "==", "0", "DEBUG level is coerced to 0" );
     ok( defined $obj->timestamp(), "Timestamp is defined" );

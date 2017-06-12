@@ -1,8 +1,8 @@
 package Log::Log4perl::Appender::Graylog;
 
 # ABSTRACT: Log dispatcher writing to udp Graylog server
-# VERSION 1.5
-my $VERSION = 1.5;
+# VERSION 1.5.1
+my $VERSION = 1.5.1;
 our @ISA = qw(Log::Log4perl::Appender);
 
 use strict;
@@ -19,7 +19,6 @@ use Log::GELF::Util qw(
     :all
 );
 
-
 ##################################################
 # Log dispatcher writing to udp Graylog server
 ##################################################
@@ -30,7 +29,7 @@ sub new {
     my $proto  = shift;
     my $class  = ref $proto || $proto;
     my %params = @_;
-    
+
     my $self = {
         name     => "unknown name",
         PeerAddr => "",
@@ -39,10 +38,10 @@ sub new {
         Gzip     => 1,
         Chunked  => 0,
         %params,
-        
+
     };
     bless $self, $class;
-    
+
 }
 
 sub _create_socket {
@@ -74,8 +73,7 @@ sub log {
 
     );
 
-
-    my $msg = validate_message($packet->TO_HASH());
+    my $msg     = validate_message( $packet->TO_HASH() );
     my $chunked = parse_size( $self->{Chunked} );
     $msg = encode($msg);
     $msg = compress($msg) if $self->{'Gzip'};
