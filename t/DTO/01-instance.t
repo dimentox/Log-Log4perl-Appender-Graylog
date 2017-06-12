@@ -45,9 +45,6 @@ subtest "$CLASS has proper values" => sub {
         "Short message is full message truncated to 50 chars."
     );
     cmp_ok( $obj->level(), "==", "0", "DEBUG level is coerced to 0" );
-    ok( defined $obj->line(),      "Line is defined" );
-    ok( defined $obj->host(),      "host is defined" );
-    ok( defined $obj->facility(),  "Facility is defined" );
     ok( defined $obj->timestamp(), "Timestamp is defined" );
     cmp_ok( $obj->_uuid(), "eq", $data->{_uuid},
         "Dynamic _var's were created" );

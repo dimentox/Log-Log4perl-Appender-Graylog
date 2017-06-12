@@ -33,6 +33,7 @@ log4perl.appender.SERVER.PeerAddr = 127.0.0.1
 log4perl.appender.SERVER.PeerPort = 12209
 log4perl.appender.SERVER.Proto    = udp
 log4perl.appender.SERVER.Gzip     = 0
+log4perl.appender.SERVER.Chunked = 0
 END
 
         
@@ -51,12 +52,13 @@ subtest "sends though udp plain" => sub {
             my $proto  = shift;
             my $class  = ref $proto || $proto;
             my %params = @_;
+            
             cmp_ok( $params{PeerAddr}, 'eq', "127.0.0.1",
                 "PeerAddr is set to localhost" );
             cmp_ok( $params{PeerPort}, '==', 12209,
                 "PeerPort is set to 12209  and is a number" );
             cmp_ok( $params{Proto}, 'eq', "udp", "Proto is set to udp" );
-            cmp_ok( $params{Type}, '==', 2, "Type is 2 and is a number" );
+            
 
             return bless \%params, $class;
         }
