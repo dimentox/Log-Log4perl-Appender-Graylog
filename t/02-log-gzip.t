@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use JSON -convert_blessed_universally;
 use Test::Most;
+use IO::Uncompress::Gunzip qw(gunzip $GunzipError) ;
 use Test::MockModule;
 use Data::Faker;
 use Data::Printer
@@ -19,21 +20,22 @@ use Data::Printer
 
 my $log;
 
-subtest "Init Logger" => sub {
+subtest "Init Logger plain" => sub {
     lives_ok {
         use Log::Log4perl;
+        Log::Log4perl->reset();
         use Log::Log4perl::Appender::Graylog;
         use Log::Log4perl::Layout::NoopLayout;
         my $config = <<'END';
 log4perl.logger = DEBUG, SERVER
 log4perl.appender.SERVER          = Log::Log4perl::Appender::Graylog
-log4perl.appender.SERVER.layout = Log::Log4perl::Layout::NoopLayout
+log4perl.appender.SERVER.layout = NoopLayout
 log4perl.appender.SERVER.PeerAddr = 127.0.0.1
 log4perl.appender.SERVER.PeerPort = 12209
 log4perl.appender.SERVER.Proto    = udp
+log4perl.appender.SERVER.Gzip     = 1
 END
 
-        Log::Log4perl->reset();
         Log::Log4perl->init_once( \$config );
 
         $log = Log::Log4perl->get_logger("log1");
@@ -41,7 +43,7 @@ END
     "lives through setting up logger";
 };
 
-subtest "sends though udp" => sub {
+subtest "sends though udp plain" => sub {
     my $log_data = Data::Faker->new()->domain_name();
     my $mock     = Test::MockModule->new('IO::Socket::INET');
     $mock->mock(
@@ -65,7 +67,9 @@ subtest "sends though udp" => sub {
         'send',
         sub {
             my $self = shift;
-            my ($data) = @_;
+            my ($gzdata) = @_;
+            my $data;
+            gunzip \$gzdata =>  \$data or die "gunzip failed: $GunzipError\n";
             my $json =
                 JSON->new->utf8->space_after->allow_nonref->convert_blessed;
             my $result;
