@@ -1,8 +1,8 @@
 package Log::Log4perl::Appender::Graylog;
 
 # ABSTRACT: Log dispatcher writing to udp Graylog server
-# VERSION 1.6
-my $VERSION = 1.6;
+# VERSION 1.7
+my $VERSION = 1.7;
 our @ISA = qw(Log::Log4perl::Appender);
 
 use strict;

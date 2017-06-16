@@ -1,8 +1,8 @@
 package Data::DTO::GELF;
 
 # ABSTRACT: The DTO object for GELF version 1.1
-# VERSION 1.6
-our $VERSION = 1.6;
+# VERSION 1.7
+our $VERSION = 1.7;
 use strict;
 use warnings;
 
