@@ -25,20 +25,22 @@ Log::Log4perl::Appender::Graylog; - Log to a Graylog server
 # DESCRIPTION
 
 This is a simple appender for writing to a graylog server.
-It relies on [IO::Socket::INET](https://metacpan.org/pod/IO::Socket::INET). [Log::GELF::Util](https://metacpan.org/pod/Log::GELF::Util). This sends in the 1.1
-format. 
+
+    It relies on L<IO::Socket::INET>. L<Log::GELF::Util>. This sends in the 1.1
+    format. 
 
 # CONFIG
-    log4perl.appender.SERVER          = Log::Log4perl::Appender::Graylog
-    log4perl.appender.SERVER.layout = NoopLayout
-    log4perl.appender.SERVER.PeerAddr = &lt;ip>
-    log4perl.appender.SERVER.PeerPort = 12201
-    log4perl.appender.SERVER.Gzip    = 1
-    log4perl.appender.SERVER.Chunked = <0|lan|wan> 
 
-       layout This needs to be NoopLayout as we do not want any special formatting.
-       Gzip Accepts an integer specifying if to compress the message. 
-       Chunked Accepts an integer specifying the chunk size or the special string values lan or wan corresponding to 8154 or 1420 respectively.
+       log4perl.appender.SERVER          = Log::Log4perl::Appender::Graylog
+       log4perl.appender.SERVER.layout = NoopLayout
+       log4perl.appender.SERVER.PeerAddr = <ip>
+       log4perl.appender.SERVER.PeerPort = 12201
+       log4perl.appender.SERVER.Gzip    = 1
+       log4perl.appender.SERVER.Chunked = <0|lan|wan> 
+       
+           layout This needs to be NoopLayout as we do not want any special formatting.
+           Gzip Accepts an integer specifying if to compress the message. 
+           Chunked Accepts an integer specifying the chunk size or the special string values lan or wan corresponding to 8154 or 1420 respectively.
     
 
 # EXAMPLE

@@ -1,8 +1,8 @@
 package Data::DTO::GELF;
 
 # ABSTRACT: The DTO object for GELF version 1.1
-# VERSION 1.5.1
-our $VERSION = 1.5.1;
+# VERSION 1.6
+our $VERSION = 1.6;
 use strict;
 use warnings;
 
@@ -74,7 +74,7 @@ has '_file' => (
 sub BUILD {
     my $self = shift;
     my $args = shift;
-    foreach my $key1 ( keys $args ) {
+    foreach my $key1 ( keys %{$args} ) {
         if ( ( substr $key1, 0, 1 ) eq "_" ) {
             $self->meta->add_attribute( "$key1" => ( accessor => $key1 ) );
             $self->meta->get_attribute($key1)
